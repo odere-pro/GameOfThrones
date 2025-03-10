@@ -5,7 +5,7 @@ export const Route = createFileRoute('/')({
   component: App,
 });
 
-function App() {
+export function App() {
   return (
     <div className="text-center">
       <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
@@ -14,7 +14,7 @@ function App() {
           className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
           alt="logo"
         />
-        <p>
+        <p className="description">
           Edit <code>src/routes/index.tsx</code> and save to reload.
         </p>
         <a
