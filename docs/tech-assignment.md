@@ -25,6 +25,7 @@ Feel free to crop or modify any image or asset for the best result.
 The mockup is just an example, feel free to deviate from it and improve the design as long as the requirements are fulfilled.
 
 ## Files
+
 You will be provided some early mocks describing the look and feel and also some graphical assets to be used in your app.
 
 ![assets/img.png](assets/wires_desktop.png)
@@ -35,6 +36,3 @@ You will be provided some early mocks describing the look and feel and also some
 
 ![img.png](assets/wires_mobile.png)
 <em>Mobile view</em>
-
-
-
