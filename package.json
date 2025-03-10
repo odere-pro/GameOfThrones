@@ -12,7 +12,8 @@
     "tsc:check": "tsc --noEmit",
     "lint:check": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint": "yarn lint:check && yarn tsc:check && yarn format:check"
+    "lint": "yarn lint:check && yarn tsc:check && yarn format:check",
+    "prepare": "husky"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -35,12 +36,17 @@
     "eslint": "^9.22.0",
     "eslint-plugin-react": "^7.37.4",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
     "jsdom": "^26.0.0",
+    "lint-staged": "^15.4.3",
     "prettier": "^3.5.3",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.26.0",
     "vite": "^6.1.0",
     "vitest": "^3.0.5",
     "web-vitals": "^4.2.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "yarn lint:fix"
   }
 }
