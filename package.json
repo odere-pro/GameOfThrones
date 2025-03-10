@@ -10,9 +10,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "tsc:check": "tsc --noEmit",
-    "lint:check": "eslint .",
+    "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint": "yarn lint:check && yarn tsc:check && yarn format:check",
+    "precommit": "yarn lint && yarn tsc:check && yarn format:check",
     "prepare": "husky"
   },
   "dependencies": {

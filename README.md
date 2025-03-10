@@ -31,6 +31,22 @@ This project uses [Vitest](https://vitest.dev/) for testing. You can run the tes
 yarn test
 ```
 
+## Development Experience
+
+This project uses Prettier, ESLint, and TypeScript to provide a great development experience.
+The code is automatically formatted and linted when you commit changes.
+
+### npm Scrips
+
+```bash
+yarn tsc:check # Check TypeScript types
+yarn format # Run prettier to fix formatting issues
+yarn format:check # Run prettier to check formatting issues
+yarn lint # Check for linting issues
+yarn lint:fix # Fix linting issues
+yarn precommit # Run all checks before committing
+```
+
 ## Styling
 
 This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
