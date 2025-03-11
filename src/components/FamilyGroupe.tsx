@@ -24,6 +24,7 @@ export default function FamilyGroupe({
     <div className="flex flex-col gap-2 md:gap-4 items-start w-full ">
       <h2 className="text-lg font-bold select-none">{family.name} members</h2>
       <ul className="flex md:flex-wrap gap-2 -mx-8 md:mx-0 py-2 w-dvw overflow-x-auto md:overflow-visible">
+        {members.length === 0 && <p>No family members</p>}
         {members.map(({ id, fullName, imageUrl }) => (
           <li key={id}>
             <CharacterLink id={id} imageUrl={imageUrl} fullName={fullName} />
