@@ -1,11 +1,14 @@
-import { createFileRoute } from '@tanstack/react-router';
 import logo from '../logo.svg';
+import { createFileRoute } from '@tanstack/react-router';
+import { useFetchCharacters } from '../components/Character/useCharacters';
 
 export const Route = createFileRoute('/')({
   component: App,
 });
 
 export function App() {
+  useFetchCharacters();
+
   return (
     <div className="text-center">
       <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
