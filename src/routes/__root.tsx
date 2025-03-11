@@ -57,7 +57,7 @@ export const Route = createRootRoute({
               <Link className="hidden md:block" to="/">
                 Game of Thrones
               </Link>
-              <div className="flex-1 md:flex-0">
+              <div className="flex flex-1 md:flex-0 justify-end">
                 <SearchInput onReset={reset} onChange={filter} />
               </div>
             </nav>

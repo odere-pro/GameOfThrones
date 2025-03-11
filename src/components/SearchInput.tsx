@@ -21,7 +21,7 @@ export default function SearchInput({ onReset, onChange }: SearchInputProps) {
   };
 
   return (
-    <div className="flex relative w-full min-w-sm -my-2 bg-[rgba(0,0,0,.25)] py-2 px-4 pr-0 rounded-sm">
+    <div className="flex relative w-full max-w-xs -my-2 bg-[rgba(0,0,0,.25)] py-2 px-4 pr-0 rounded-sm">
       <input
         type="text"
         placeholder="search"
