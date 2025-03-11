@@ -9,6 +9,7 @@ export const Route = createFileRoute('/')({
 
 export function App() {
   const allCharacters = useStore(charactersStore, getAllCharacters);
+
   return (
     <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
       {allCharacters.map(({ id, fullName, imageUrl }) => (

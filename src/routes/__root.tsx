@@ -4,17 +4,33 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useFetchCharacters } from '../hooks/useCharacters';
 import backgroundImage from '../assets/background.png';
 import SearchInput from '../components/SearchInput';
+import type { Character } from '../types';
+import { charactersStore, searchCharacters } from '../stores/charactersStore';
+import { useState, useEffect } from 'react';
 
 export const Route = createRootRoute({
   component: () => {
-    useFetchCharacters();
+    const { data } = useFetchCharacters();
+    const [original, setOriginal] = useState<Character[]>([]);
+
+    useEffect(() => {
+      if (!data?.length || original.length) return;
+      setOriginal(data);
+    }, [data, original]);
 
     const reset = () => {
-      console.log('reset');
+      charactersStore.setState(() => original);
     };
 
     const filter = (value: string) => {
-      console.log(value);
+      if (!value) {
+        reset();
+        return;
+      }
+
+      if (data) {
+        charactersStore.setState(() => searchCharacters(data, value));
+      }
     };
 
     return (

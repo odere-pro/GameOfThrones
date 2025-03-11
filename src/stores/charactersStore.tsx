@@ -13,6 +13,7 @@ export const getCharacterById =
     return state.filter((character) => character.id === Number(id))[0];
   };
 
+// TODO: extra feature, for the next steps
 export const getAllHouses = (state: StoreState): string[] => {
   const houses = state
     .map((character) => character.family)
@@ -20,12 +21,14 @@ export const getAllHouses = (state: StoreState): string[] => {
   return Array.from(new Set(houses));
 };
 
+// TODO: extra feature, for the next steps
 export const getAllFamilies = (state: StoreState): string[] => {
   const houses = state.map((character) => character.family);
   return Array.from(new Set(houses));
 };
 
-export const getAllFamilyMembers = (state: StoreState): Family[] => {
+// TODO: extra feature, for the next steps
+export const getAllMembersGroupedByFamily = (state: StoreState): Family[] => {
   const result: Record<string, Character[]> = {};
 
   state.forEach((character) => {
@@ -66,36 +69,42 @@ export const getFamilyMembers =
     }
   };
 
-export const searchCharacters =
-  (query: string) =>
-  (state: StoreState): WeightedCharacter[] => {
-    const words = query
-      .split(' ')
-      .map((word) => word.trim())
-      .filter((word) => word.length > 0);
+// TODO: add improvements to the search
+export const searchCharacters = (
+  state: StoreState,
+  query: string,
+): Character[] => {
+  const words = query
+    .split(' ')
+    .map((word) => word.trim())
+    .filter((word) => word.length > 0);
 
-    const result: WeightedCharacter[] = state.map((character) => {
-      const { family, fullName, title } = character;
-      let score = 0;
-      words.forEach((word) => {
-        if (family.toLowerCase().includes(word.toLowerCase())) {
-          score += 1;
-        }
-        if (title.toLowerCase().includes(word.toLowerCase())) {
-          score += 2;
-        }
-        if (fullName.toLowerCase().includes(word.toLowerCase())) {
-          score += 3;
-        }
-      });
-
-      return {
-        ...character,
-        weight: score,
-      };
+  const result: WeightedCharacter[] = state.map((character) => {
+    const { family, fullName, title } = character;
+    let score = 0;
+    words.forEach((word) => {
+      if (family.toLowerCase().includes(word.toLowerCase())) {
+        score += 1;
+      }
+      if (title.toLowerCase().includes(word.toLowerCase())) {
+        score += 2;
+      }
+      if (fullName.toLowerCase().includes(word.toLowerCase())) {
+        score += 3;
+      }
     });
 
-    return result
+    return {
+      ...character,
+      weight: score,
+    };
+  });
+
+  return (
+    result
       .filter(({ weight }) => weight)
-      .sort((a, b) => b.weight - a.weight);
-  };
+      .sort((a, b) => b.weight - a.weight)
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .map(({ weight, ...rest }) => rest)
+  );
+};
