@@ -1,6 +1,20 @@
-Welcome to your new TanStack app!
+# Game of Thrones search
 
-# Getting Started
+## Getting Started
+
+Install `nvm` (Node Version Manager) if you don't have it installed already:
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+```
+
+Load `nvm` and install the required Node.js version:
+
+```bash
+source ~/.nvm/nvm.sh
+nvm install
+nvm use
+```
 
 Install yarn if you don't have it installed already:
 
@@ -15,7 +29,7 @@ yarn install
 yarn start
 ```
 
-# Building For Production
+## Building For Production
 
 To build this application for production:
 
