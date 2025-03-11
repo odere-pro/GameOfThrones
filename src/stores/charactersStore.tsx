@@ -1,11 +1,17 @@
 import { Store } from '@tanstack/store';
-import type { Character, Family, WeightedCharacter } from './types';
+import type { Character, Family, WeightedCharacter } from '../types';
 
 export type StoreState = Character[];
 
-export const store = new Store<StoreState>([]);
+export const charactersStore = new Store<StoreState>([]);
 
 export const getAllCharacters = (state: StoreState): StoreState => state;
+
+export const getCharacterById =
+  (id: string) =>
+  (state: StoreState): Character | undefined => {
+    return state.filter((character) => character.id === Number(id))[0];
+  };
 
 export const getAllHouses = (state: StoreState): string[] => {
   const houses = state
@@ -38,7 +44,7 @@ export const getAllFamilyMembers = (state: StoreState): Family[] => {
 
 export const getFamilyMembers =
   (name: string) =>
-  (state: StoreState): Family[] => {
+  (state: StoreState): Family | undefined => {
     const result: Record<string, Character[]> = {};
 
     state
@@ -52,12 +58,12 @@ export const getFamilyMembers =
         result[family].push(character);
       });
 
-    return Object.entries(result).map(
-      ([key, value]: [string, Character[]]) => ({
-        name: key,
-        members: value,
-      }),
-    );
+    if (result[name]) {
+      return {
+        name,
+        members: result[name],
+      };
+    }
   };
 
 export const searchCharacters =

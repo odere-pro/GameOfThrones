@@ -1,5 +1,5 @@
-import { getAllCharacters } from './api';
-import { store } from './charactersStore';
+import { getAllCharacters } from '../api';
+import { charactersStore } from '../stores/charactersStore';
 import { useEffect } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -23,7 +23,7 @@ export function useFetchCharacters() {
 
   useEffect(() => {
     if (data?.length) {
-      store.setState(() => data);
+      charactersStore.setState(() => data);
     }
   }, [data]);
 
