@@ -1,14 +1,20 @@
-import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import { QueryClient } from '@tanstack/react-query';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { CACHE_KEY, fetchCharacters } from './routes/home';
+import { StrictMode } from 'react';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import { scan } from 'react-scan';
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
 
 import './styles.css';
 import reportWebVitals from './reportWebVitals.ts';
+
+scan({
+  enabled: true,
+});
 
 // Create a new router instance
 const router = createRouter({
@@ -26,11 +32,16 @@ declare module '@tanstack/react-router' {
   }
 }
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      gcTime: 1000 * 60,
+    },
+  },
+});
 
-queryClient.prefetchQuery({
-  queryKey: [CACHE_KEY],
-  queryFn: fetchCharacters,
+const persister = createSyncStoragePersister({
+  storage: window.localStorage,
 });
 
 // Render the app
@@ -39,9 +50,12 @@ if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
+      <PersistQueryClientProvider
+        client={queryClient}
+        persistOptions={{ persister }}
+      >
         <RouterProvider router={router} />
-      </QueryClientProvider>
+      </PersistQueryClientProvider>
     </StrictMode>,
   );
 }
