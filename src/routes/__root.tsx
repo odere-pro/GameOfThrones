@@ -7,9 +7,11 @@ import SearchInput from '../components/SearchInput';
 import type { Character } from '../types';
 import { charactersStore, searchCharacters } from '../stores/charactersStore';
 import { useState, useEffect } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 
 export const Route = createRootRoute({
   component: () => {
+    const navigate = useNavigate();
     const { data } = useFetchCharacters();
     const [original, setOriginal] = useState<Character[]>([]);
 
@@ -23,6 +25,9 @@ export const Route = createRootRoute({
     };
 
     const filter = (value: string) => {
+      if (window.location.pathname !== '/') {
+        navigate({ to: '/' });
+      }
       if (!value) {
         reset();
         return;
